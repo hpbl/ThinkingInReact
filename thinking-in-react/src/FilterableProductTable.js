@@ -8,6 +8,18 @@ class FilterableProductTable extends Component {
     this.state = {filterText: '', inStockOnly: false};
   }
 
+  handleInStockInputChange = (e) => {
+    this.setState({
+      inStockOnly: e.target.checked
+    })
+  }
+
+  handleFilterTextInput = (e) => {
+    this.setState({
+      filterText: e.target.value
+    })
+  }
+
   render() {
     var PRODUCTS = [
       {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
@@ -23,12 +35,14 @@ class FilterableProductTable extends Component {
         <SearchBar
           filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
+          onChangeText={this.handleFilterTextInput}
+          onChangeFilter={this.handleInStockInputChange}
         />
 
         <ProductTable
           products={PRODUCTS}
           filterText={this.state.filterText}
-          inStockOnly={this.state.inStockOnly}
+          inStockOnly={ this.state.inStockOnly }
         />
       </div>
     );
